@@ -1,10 +1,16 @@
 package fr.varan.demonia;
 
 import com.mojang.logging.LogUtils;
+import fr.varan.demonia.item.ModCreativeModeTabs;
+import fr.varan.demonia.item.ModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,25 +37,29 @@ public class Demonia
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-
+        //ajout des items
+        ModItems.ITEMS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        modEventBus.addListener(this::addCreative);
 
 
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+    }
 
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+    public void addCreative(CreativeModeTabEvent.BuildContents event){
+        if(event.getTab() == CreativeModeTabs.INGREDIENTS){
+            event.accept(ModItems.BLACK_TOPAZE);
+        }
+        if(event.getTab() == ModCreativeModeTabs.DEMONIA_TAB){
+            event.accept(ModItems.BLACK_TOPAZE);
+        }
     }
     
 
