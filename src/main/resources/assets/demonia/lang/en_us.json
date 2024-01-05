@@ -1,4 +1,10 @@
 {
   "item.demonia.black_topaze": "Black Topaze",
-  "creativemodetab.demonia_tab": "Demonia"
+
+  "creativemodetab.demonia_tab": "Demonia",
+
+  "block.demonia.black_topaze_block": "Black Topaze Block",
+
+  "block.demonia.black_topaze_ore": "Black Topaze Ore",
+  "block.demonia.deepslate_black_topaze_ore": "Deepslate Black Topaze Ore"
 }

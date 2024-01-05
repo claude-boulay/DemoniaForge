@@ -1,6 +1,7 @@
 package fr.varan.demonia;
 
 import com.mojang.logging.LogUtils;
+import fr.varan.demonia.block.ModBlocks;
 import fr.varan.demonia.item.ModCreativeModeTabs;
 import fr.varan.demonia.item.ModItems;
 import net.minecraft.client.Minecraft;
@@ -40,6 +41,9 @@ public class Demonia
         //ajout des items
         ModItems.ITEMS.register(modEventBus);
 
+        //ajout des blocks
+        ModBlocks.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -57,8 +61,14 @@ public class Demonia
         if(event.getTab() == CreativeModeTabs.INGREDIENTS){
             event.accept(ModItems.BLACK_TOPAZE);
         }
+        if(event.getTab() == CreativeModeTabs.BUILDING_BLOCKS){
+            event.accept(ModBlocks.BLACK_TOPAZE_BLOCK.get());
+        }
+
+
         if(event.getTab() == ModCreativeModeTabs.DEMONIA_TAB){
             event.accept(ModItems.BLACK_TOPAZE);
+            event.accept(ModBlocks.BLACK_TOPAZE_BLOCK.get());
         }
     }
     
